@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.i("FB User ID", loginResult.getAccessToken().getUserId());
                 Log.i("FB User Token", loginResult.getAccessToken().getToken());
-              
+
             }
 
             @Override
