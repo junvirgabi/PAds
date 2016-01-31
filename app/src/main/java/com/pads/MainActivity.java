@@ -1,13 +1,9 @@
 package com.pads;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,6 +16,8 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         CallbackManager callbackManager = CallbackManager.Factory.create();
+
+        //User permissions test
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "user_friends", "user_likes"));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
