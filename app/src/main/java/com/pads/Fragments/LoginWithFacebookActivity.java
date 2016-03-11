@@ -16,10 +16,15 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.pads.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -62,6 +67,8 @@ public class LoginWithFacebookActivity extends Fragment {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
+
+
     }
 
     @Override
@@ -72,8 +79,6 @@ public class LoginWithFacebookActivity extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-
-//        FacebookSdk.sdkInitialize(this.getContext());
 
         //find all the views
         mLoginButton = (LoginButton) view.findViewById(R.id.login_button);
@@ -95,6 +100,22 @@ public class LoginWithFacebookActivity extends Fragment {
                 }
                 Log.d("FB User Token", loginResult.getAccessToken().getToken());
                 Log.d("ACCESS TOKEN", "" + mAccessToken);
+
+                final GraphRequest request = GraphRequest.newMeRequest(mAccessToken, new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        try {
+                            Log.d("Likes", object.getString("likes").toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "name,likes{name,category}");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
