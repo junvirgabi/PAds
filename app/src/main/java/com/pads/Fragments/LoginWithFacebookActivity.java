@@ -95,27 +95,14 @@ public class LoginWithFacebookActivity extends Fragment {
                 mProfile = Profile.getCurrentProfile();
 
                 if (mProfile != null) {
-                    mTvTestData.setText(mProfile.getFirstName());
+                    mTvTestData.setText(mProfile.getName());
+//                    mTvName.setText(mProfile.getName());
                     Log.d("NAME", "" + mProfile.getFirstName());
                 }
                 Log.d("FB User Token", loginResult.getAccessToken().getToken());
                 Log.d("ACCESS TOKEN", "" + mAccessToken);
 
-                final GraphRequest request = GraphRequest.newMeRequest(mAccessToken, new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        try {
-                            Log.d("Likes", object.getString("likes").toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
 
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "name,likes{name,category}");
-                request.setParameters(parameters);
-                request.executeAsync();
             }
 
             @Override
