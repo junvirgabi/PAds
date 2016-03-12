@@ -21,8 +21,10 @@ import com.pads.API.FacebookApi;
 import com.pads.Adapters.ListViewAdapterUserLikes;
 import com.pads.Entities.UserLikes;
 import com.pads.MainActivity;
+import com.pads.PageLikedDetailsActivity;
 import com.pads.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +76,10 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), PageLikedDetailsActivity.class);
         intent.putExtra("key_position", position);
+        intent.putExtra("PAGE_NAME", (Serializable) mLikes.get(position).getmName());
+        intent.putExtra("PAGE_CATEGORY", (Serializable) mLikes.get(position).getmCategory());
         startActivity(intent);
     }
 
@@ -89,7 +93,7 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         @Override
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
-            mTvEmpty.setVisibility(View.GONE);
+//            mTvEmpty.setVisibility(View.GONE);
             adapter.addAll(userLikes);
         }
     }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,10 +15,10 @@
     <ImageView
         android:id="@+id/imgPagePicture"
         android:layout_width="150dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:contentDescription="@null"/>
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/tvPageName"
@@ -30,6 +29,19 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="italic"
         tools:text="Page Name" />
+
+    <TextView
+        android:id="@+id/tvPageCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvPageName"
+        android:layout_toEndOf="@+id/imgPagePicture"
+        android:layout_toRightOf="@+id/imgPagePicture"
+        android:text="Category"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="italic" />
 
 
 </RelativeLayout>
