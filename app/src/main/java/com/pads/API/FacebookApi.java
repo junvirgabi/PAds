@@ -63,6 +63,7 @@ public class FacebookApi {
         request.setParameters(parameters);
         request.executeAsync();
 
+//        Log.d("JSON ARRAY",   + "");
         return likes;
     }
 }

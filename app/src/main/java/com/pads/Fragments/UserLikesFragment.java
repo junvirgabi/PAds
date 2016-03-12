@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.pads.API.FacebookApi;
-import com.pads.Adapters.AdvertisementsAdapter;
 import com.pads.Entities.Advertisements;
 import com.pads.Entities.UserLikes;
 import com.pads.R;
@@ -28,15 +27,15 @@ import java.util.List;
 /**
  * Created by srthg on 3/12/2016.
  */
-public class ListViewFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class UserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
     private TextView mTvEmpty;
     private List<Advertisements> mAds= new ArrayList<>();
 
 
-    public static ListViewFragment newInstance() {
-        return new ListViewFragment();
+    public static UserLikesFragment newInstance() {
+        return new UserLikesFragment();
     }
 
     @Override
@@ -58,20 +57,21 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
         mListView = (ListView) view.findViewById(R.id.listView);
         mTvEmpty = (TextView) view.findViewById(android.R.id.empty);
 
-        // create a new instance of adapter
-        AdvertisementsAdapter adapter = new AdvertisementsAdapter(getActivity(),R.layout.data_listview,mAds);
+//        // create a new instance of adapter
+//        AdvertisementsAdapter adapter = new AdvertisementsAdapter(getActivity(),R.layout.data_listview,mAds);
+//
+//        // set the adapter
+//        mListView.setAdapter(adapter);
+//
+//        if (adapter.isEmpty()) {
+//            mTvEmpty.setVisibility(View.VISIBLE);
+//        } else {
+//            mTvEmpty.setVisibility(View.GONE);
+//        }
+//
+//        // set item click listener
+//        mListView.setOnItemClickListener(this);
 
-        // set the adapter
-        mListView.setAdapter(adapter);
-
-        if (adapter.isEmpty()) {
-            mTvEmpty.setVisibility(View.VISIBLE);
-        } else {
-            mTvEmpty.setVisibility(View.GONE);
-        }
-
-        // set item click listener
-        mListView.setOnItemClickListener(this);
     }
 
     @Override

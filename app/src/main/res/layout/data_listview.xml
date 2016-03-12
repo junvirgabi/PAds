@@ -15,13 +15,13 @@
         android:scaleType="centerInside" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvAdsName"
+            android:id="@+id/tvLikeName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -29,7 +29,7 @@
             tools:text="Advertisement Name"/>
 
         <TextView
-            android:id="@+id/tvAdsCategory"
+            android:id="@+id/tvLikeCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="italic"

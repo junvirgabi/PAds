@@ -5,7 +5,6 @@ package com.pads.Adapters;
  */
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.pads.Entities.Advertisements;
 import com.pads.R;
-import com.pads.Entities.Advertisements;
 
 import java.util.List;
 
@@ -71,8 +69,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public MovieViewHolder(View view) {
             super(view);
 
-            tvName = (TextView) view.findViewById(R.id.tvAdsName);
-            tvCategory = (TextView) view.findViewById(R.id.tvAdsCategory);
+            tvName = (TextView) view.findViewById(R.id.tvLikeName);
+            tvCategory = (TextView) view.findViewById(R.id.tvLikeCategory);
 
             // once an item view (list item or grid item) is clicked
             view.setOnClickListener(this);

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -16,22 +15,17 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.pads.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
 /**
  * Created by daleg on 10/02/2016.
  */
-public class LoginWithFacebookActivity extends Fragment {
+public class LoginWithFacebookFragment extends Fragment {
 
     private LoginButton mLoginButton;
     private CallbackManager mCallbackManager;
@@ -41,25 +35,8 @@ public class LoginWithFacebookActivity extends Fragment {
     //    private ImageView mImgViewProfilePic;
     private Profile mProfile;
 
-//    private FacebookCallback<LoginResult> mCallback = new FacebookCallback<LoginResult>() {
-//        @Override
-//        public void onSuccess(LoginResult loginResult) {
-//
-//        }
-//
-//        @Override
-//        public void onCancel() {
-//
-//        }
-//
-//        @Override
-//        public void onError(FacebookException error) {
-//
-//        }
-//    };
-
-    public static LoginWithFacebookActivity newInstance() {
-        return new LoginWithFacebookActivity();
+    public static LoginWithFacebookFragment newInstance() {
+        return new LoginWithFacebookFragment();
     }
 
     @Override
@@ -67,8 +44,6 @@ public class LoginWithFacebookActivity extends Fragment {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
-
-
     }
 
     @Override

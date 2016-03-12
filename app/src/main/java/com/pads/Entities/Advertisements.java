@@ -8,6 +8,16 @@ public class Advertisements
     private String Adsname;
     private String AdsCategory;
 
+    public Advertisements(String adsname, String adsCategory) {
+
+        Adsname = adsname;
+        AdsCategory = adsCategory;
+    }
+
+    public Advertisements() {
+
+    }
+
     public String getAdsname() {
         return Adsname;
     }
@@ -22,17 +32,6 @@ public class Advertisements
 
     public void setAdsCategory(String adsCategory) {
         AdsCategory = adsCategory;
-    }
-
-    public Advertisements(String adsname, String adsCategory) {
-
-        Adsname = adsname;
-        AdsCategory = adsCategory;
-    }
-
-    public Advertisements()
-    {
-
     }
 
 }

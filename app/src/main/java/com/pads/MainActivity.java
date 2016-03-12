@@ -7,33 +7,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.pads.Fragments.LoginWithFacebookActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Arrays;
+import com.pads.Fragments.RecyclerViewUserLikesFragment;
+import com.pads.Fragments.UserLikesFragment;
+import com.pads.Fragments.LoginWithFacebookFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    LoginWithFacebookActivity mLoginWithFacebookActivityFragment;
+    LoginWithFacebookFragment mLoginWithFacebookFragmentFragment;
+    //    UserLikesFragment mUserLikesFragment;
+    RecyclerViewUserLikesFragment mRecyclerViewUserLikesFragment;
 
 
     @Override
@@ -109,8 +94,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_user_likes) {
+            mRecyclerViewUserLikesFragment = RecyclerViewUserLikesFragment.newInstance();
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, mRecyclerViewUserLikesFragment)
+                    .commit();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -118,11 +108,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_pads) {
-            mLoginWithFacebookActivityFragment = LoginWithFacebookActivity.newInstance();
+            mLoginWithFacebookFragmentFragment = LoginWithFacebookFragment.newInstance();
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mLoginWithFacebookActivityFragment)
+                    .replace(R.id.fragmentContainer, mLoginWithFacebookFragmentFragment)
                     .commit();
         }
 

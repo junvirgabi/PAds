@@ -4,18 +4,14 @@ package com.pads.Adapters;
  * Created by srthg on 3/12/2016.
  */
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pads.Entities.Advertisements;
 import com.pads.R;
-import com.pads.Entities.Advertisements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +46,7 @@ public class AdvertisementsAdapter extends ArrayAdapter<Advertisements> {
 
             // create the view holder
             viewHolder = new ViewHolder();
-            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvAdsName);
+            viewHolder.tvName = (TextView) convertView.findViewById(R.id.tvLikeName);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
