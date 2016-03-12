@@ -1,9 +1,8 @@
 package com.pads.Fragments;
 
-import android.annotation.TargetApi;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,16 +26,17 @@ import java.util.List;
  */
 public class RecyclerViewUserLikesFragment extends Fragment {
 
+    RecyclerViewAdapterUserLikes mRecyclerViewAdapterUserLikes;
     private RecyclerView recyclerView;
     private TextView tvEmpty;
-    private List<UserLikes> likes = new ArrayList<>();
+    private List<UserLikes> mLikes = new ArrayList<>();
 
     public static RecyclerViewUserLikesFragment newInstance() {
         return new RecyclerViewUserLikesFragment();
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         FetchLikes fl = new FetchLikes();
@@ -49,7 +49,7 @@ public class RecyclerViewUserLikesFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //find all the views
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerListView);
         tvEmpty = (TextView) view.findViewById(R.id.empty);
@@ -59,7 +59,7 @@ public class RecyclerViewUserLikesFragment extends Fragment {
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
-        RecyclerViewAdapterUserLikes mRecyclerViewAdapterUserLikes = new RecyclerViewAdapterUserLikes(getContext(), R.layout.recycler_list_item, likes);
+        mRecyclerViewAdapterUserLikes = new RecyclerViewAdapterUserLikes(getContext(), R.layout.recycler_list_item, mLikes);
 
         recyclerView.setAdapter(mRecyclerViewAdapterUserLikes);
 
@@ -70,10 +70,10 @@ public class RecyclerViewUserLikesFragment extends Fragment {
         }
     }
 
-    public class FetchLikes extends AsyncTask<String, Void, List<UserLikes>> {
+    public class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
 
         @Override
-        protected List<UserLikes> doInBackground(String... params) {
+        protected List<UserLikes> doInBackground(AccessToken... params) {
             return FacebookApi.getUserLikes(AccessToken.getCurrentAccessToken());
         }
 
@@ -81,7 +81,7 @@ public class RecyclerViewUserLikesFragment extends Fragment {
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
             Log.d("ACCESS TOKEN", AccessToken.getCurrentAccessToken().getToken());
-            Log.d("LIKES", likes.size() + "");
+            Log.d("LIKES", mLikes.size() + "");
         }
     }
 }

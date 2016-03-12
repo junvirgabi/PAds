@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".fragments.ListViewFragment">
+    tools:context=".Fragments.ListViewFragment">
 
     <ListView
         android:id="@+id/listView"
@@ -18,6 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="empty"/>
+        android:text="There's no item in the list view" />
 
 </RelativeLayout>

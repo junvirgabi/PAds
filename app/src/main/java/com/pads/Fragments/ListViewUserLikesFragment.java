@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.pads.API.FacebookApi;
+import com.pads.Adapters.ListViewAdapterUserLikes;
 import com.pads.Entities.Advertisements;
 import com.pads.Entities.UserLikes;
 import com.pads.R;
@@ -27,15 +28,16 @@ import java.util.List;
 /**
  * Created by srthg on 3/12/2016.
  */
-public class UserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class ListViewUserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
     private TextView mTvEmpty;
-    private List<Advertisements> mAds= new ArrayList<>();
+    private List<UserLikes> mLikes = new ArrayList<>();
 
+    private ListViewAdapterUserLikes adapter;
 
-    public static UserLikesFragment newInstance() {
-        return new UserLikesFragment();
+    public static ListViewUserLikesFragment newInstance() {
+        return new ListViewUserLikesFragment();
     }
 
     @Override
@@ -55,10 +57,19 @@ public class UserLikesFragment extends Fragment implements AdapterView.OnItemCli
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // find all the views
         mListView = (ListView) view.findViewById(R.id.listView);
-        mTvEmpty = (TextView) view.findViewById(android.R.id.empty);
+        mTvEmpty = (TextView) view.findViewById(R.id.empty);
+
+        // create a new instance of adapter
+        adapter = new ListViewAdapterUserLikes(getActivity(), R.layout.listview_list_item, mLikes);
+
+        // set the adapter
+        mListView.setAdapter(adapter);
+
+        // set item click listener
+        mListView.setOnItemClickListener(this);
 
 //        // create a new instance of adapter
-//        AdvertisementsAdapter adapter = new AdvertisementsAdapter(getActivity(),R.layout.data_listview,mAds);
+//        AdvertisementsAdapter adapter = new AdvertisementsAdapter(getActivity(),R.layout.listview_list_item,mLikes);
 //
 //        // set the adapter
 //        mListView.setAdapter(adapter);
@@ -85,14 +96,19 @@ public class UserLikesFragment extends Fragment implements AdapterView.OnItemCli
 //        intent.putExtra("key_position", position);
 //        startActivity(intent);
 
-    public class FetchLikes extends AsyncTask<String, Void, List<UserLikes>> {
+    public class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
 
         @Override
-        protected List<UserLikes> doInBackground(String... params) {
+        protected List<UserLikes> doInBackground(AccessToken... params) {
             return FacebookApi.getUserLikes(AccessToken.getCurrentAccessToken());
         }
 
-
+        @Override
+        protected void onPostExecute(List<UserLikes> userLikes) {
+            super.onPostExecute(userLikes);
+//            mTvEmpty.setVisibility(View.GONE);
+            adapter.addAll(userLikes);
+        }
     }
 }
 

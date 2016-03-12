@@ -10,14 +10,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.pads.Adapters.ListViewAdapterUserLikes;
+import com.pads.Fragments.ListViewUserLikesFragment;
 import com.pads.Fragments.RecyclerViewUserLikesFragment;
-import com.pads.Fragments.UserLikesFragment;
 import com.pads.Fragments.LoginWithFacebookFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     LoginWithFacebookFragment mLoginWithFacebookFragmentFragment;
-    //    UserLikesFragment mUserLikesFragment;
+    ListViewUserLikesFragment mListViewUserLikesFragment;
     RecyclerViewUserLikesFragment mRecyclerViewUserLikesFragment;
 
 
@@ -95,11 +96,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_user_likes) {
-            mRecyclerViewUserLikesFragment = RecyclerViewUserLikesFragment.newInstance();
+//            mRecyclerViewUserLikesFragment = RecyclerViewUserLikesFragment.newInstance();
+            mListViewUserLikesFragment = ListViewUserLikesFragment.newInstance();
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragmentContainer, mRecyclerViewUserLikesFragment)
+                    .replace(R.id.fragmentContainer, mListViewUserLikesFragment)
                     .commit();
         } else if (id == R.id.nav_gallery) {
 
