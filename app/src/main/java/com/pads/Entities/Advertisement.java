@@ -7,7 +7,7 @@ public class Advertisement {
     private String mAdName;
     private String mAdCategory;
 
-    public Advertisement() {
+    public Advertisement(String s, String s1, int a11) {
     }
 
     public Advertisement(String mAdName, String mAdCategory) {
