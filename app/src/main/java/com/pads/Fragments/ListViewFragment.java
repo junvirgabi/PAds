@@ -4,7 +4,7 @@ package com.pads.Fragments;
  * Created by srthg on 3/12/2016.
  */
 
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,10 +15,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.facebook.AccessToken;
+import com.pads.API.FacebookApi;
 import com.pads.Adapters.AdvertisementsAdapter;
 import com.pads.Entities.Advertisements;
+import com.pads.Entities.UserLikes;
 import com.pads.R;
-import com.pads.Entities.Advertisements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,8 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        FetchLikes fl = new FetchLikes();
+        fl.execute();
     }
 
     @Override
@@ -81,6 +84,15 @@ public class ListViewFragment extends Fragment implements AdapterView.OnItemClic
 //        Intent intent = new Intent(getActivity(), MovieDetailsActivity.class);
 //        intent.putExtra("key_position", position);
 //        startActivity(intent);
-//    }
+
+    public class FetchLikes extends AsyncTask<String, Void, List<UserLikes>> {
+
+        @Override
+        protected List<UserLikes> doInBackground(String... params) {
+            return FacebookApi.getUserLikes(AccessToken.getCurrentAccessToken());
+        }
+
+
+    }
 }
 

@@ -102,7 +102,6 @@ public class LoginWithFacebookActivity extends Fragment {
                 Log.d("FB User Token", loginResult.getAccessToken().getToken());
                 Log.d("ACCESS TOKEN", "" + mAccessToken);
 
-
             }
 
             @Override
