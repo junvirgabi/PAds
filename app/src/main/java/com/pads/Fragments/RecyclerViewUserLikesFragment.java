@@ -48,7 +48,6 @@ public class RecyclerViewUserLikesFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_recycler_view_list, container, false);
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         //find all the views
@@ -81,8 +80,8 @@ public class RecyclerViewUserLikesFragment extends Fragment {
         @Override
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
-            likes = userLikes;
             Log.d("ACCESS TOKEN", AccessToken.getCurrentAccessToken().getToken());
+            Log.d("LIKES", likes.size() + "");
         }
     }
 }

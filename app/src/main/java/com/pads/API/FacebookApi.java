@@ -42,7 +42,9 @@ public class FacebookApi {
             public void onCompleted(JSONObject object, GraphResponse response) {
                 try {
                     jsonObject = object.getJSONObject(FB_LIKES);
+                    Log.d("OBJECT", jsonObject.toString());
                     jsonArray = jsonObject.getJSONArray(FB_DATA);
+                    Log.d("ARRAY", jsonArray.toString());
                     for (int i = 0; i < jsonArray.length(); i++) {
                         jsonObject2 = jsonArray.getJSONObject(i);
 

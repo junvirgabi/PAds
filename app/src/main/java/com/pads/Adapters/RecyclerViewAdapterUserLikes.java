@@ -3,6 +3,7 @@ package com.pads.Adapters;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class RecyclerViewAdapterUserLikes extends RecyclerView.Adapter<RecyclerV
     public void onBindViewHolder(UserLikesHolder holder, int position) {
         UserLikes userLikes = mLikes.get(position);
 
+        Log.d("USER LIKES", userLikes.toString());
         if (userLikes != null) {
             if (holder.tvLikeName != null) {
                 holder.tvLikeName.setText(userLikes.getmName());
