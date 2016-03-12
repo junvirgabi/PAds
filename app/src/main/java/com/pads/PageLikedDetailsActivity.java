@@ -8,22 +8,22 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pads.Entities.Advertisements;
+import com.pads.Entities.PageLiked;
 
 /**
  * Created by srthg on 3/13/2016.
  */
-public class AdsDetailsActivity extends AppCompatActivity {
+public class PageLikedDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ads_details);
+        setContentView(R.layout.activity_page_liked_details);
 
         // check intent data passed
         Intent intent = getIntent();
         if (intent == null) {
-            throw new RuntimeException("AdsDetailsActivity is expecting an int extra passed by Intent");
+            throw new RuntimeException("PageLikedDetailsActivity is expecting an int extra passed by Intent");
         }
 
         // checks if a movie is present
@@ -32,8 +32,8 @@ public class AdsDetailsActivity extends AppCompatActivity {
             throw new IllegalArgumentException("position passed is invalid.");
         }
 
-        Advertisements ads = new Advertisements();
-        String ad = ads.getAdsname().toString();
+        PageLiked ads = new PageLiked();
+        String ad = ads.getmPageName().toString();
 
         if (ad == null) {
             throw new NullPointerException("No movie found at the passed position.");
@@ -45,15 +45,14 @@ public class AdsDetailsActivity extends AppCompatActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(ads.getAdsname());
+            getSupportActionBar().setTitle(ads.getmPageName());
         }
 
-        ImageView imgMovie = (ImageView) findViewById(R.id.imgAds);
-        TextView tvAdsCategory = (TextView) findViewById(R.id.tvAdsCategory);
+        ImageView imgMovie = (ImageView) findViewById(R.id.imgPagePicture);
+        TextView tvAdsCategory = (TextView) findViewById(R.id.tvPageName);
 
 
-
-        tvAdsCategory.setText(ads.getAdsCategory());
+        tvAdsCategory.setText(ads.getmPageCategory());
 
     }
 

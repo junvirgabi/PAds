@@ -10,11 +10,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="sidespell.tech.viewholderquiz.MovieDetailsActivity"
-    tools:showIn="@layout/activity_ads_details">
+    tools:context=".PageLikedDetailsActivity"
+    tools:showIn="@layout/activity_page_liked_details">
 
     <ImageView
-        android:id="@+id/imgAds"
+        android:id="@+id/imgPagePicture"
         android:layout_width="150dp"
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
@@ -22,14 +22,14 @@
         android:contentDescription="@null"/>
 
     <TextView
-        android:id="@+id/tvAdsCategory"
+        android:id="@+id/tvPageName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imgAds"
-        android:layout_toRightOf="@id/imgAds"
+        android:layout_toEndOf="@id/imgPagePicture"
+        android:layout_toRightOf="@id/imgPagePicture"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="italic"
-        tools:text="Ads Category"/>
+        tools:text="Page Name" />
 
 
 </RelativeLayout>

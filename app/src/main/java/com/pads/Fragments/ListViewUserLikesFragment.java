@@ -19,10 +19,8 @@ import android.widget.TextView;
 import com.facebook.AccessToken;
 import com.pads.API.FacebookApi;
 import com.pads.Adapters.ListViewAdapterUserLikes;
-import com.pads.Entities.Advertisements;
 import com.pads.Entities.UserLikes;
 import com.pads.MainActivity;
-import com.pads.MyApplication;
 import com.pads.R;
 
 import java.util.ArrayList;
@@ -71,21 +69,6 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         // set item click listener
         mListView.setOnItemClickListener(this);
 
-//        // create a new instance of adapter
-//        AdvertisementsAdapter adapter = new AdvertisementsAdapter(getActivity(),R.layout.listview_list_item,mLikes);
-//
-//        // set the adapter
-//        mListView.setAdapter(adapter);
-//
-//        if (adapter.isEmpty()) {
-//            mTvEmpty.setVisibility(View.VISIBLE);
-//        } else {
-//            mTvEmpty.setVisibility(View.GONE);
-//        }
-//
-//        // set item click listener
-//        mListView.setOnItemClickListener(this);
-
     }
 
 
@@ -106,7 +89,7 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         @Override
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
-//            mTvEmpty.setVisibility(View.GONE);
+            mTvEmpty.setVisibility(View.GONE);
             adapter.addAll(userLikes);
         }
     }

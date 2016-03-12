@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pads.Entities.Advertisements;
+import com.pads.Entities.PageLiked;
 import com.pads.R;
 
 import java.util.List;
@@ -24,9 +24,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private Context mContext;
     private int mLayoutId;
-    private List<Advertisements> mAds;
+    private List<PageLiked> mAds;
 
-    public RecyclerViewAdapter(Context context, int layoutId, List<Advertisements> ads) {
+    public RecyclerViewAdapter(Context context, int layoutId, List<PageLiked> ads) {
         mContext = context;
         mLayoutId = layoutId;
         mAds = ads;
@@ -40,17 +40,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
-        Advertisements ad = mAds.get(position);
+        PageLiked ad = mAds.get(position);
 
         if (ad != null) {
 //            if (holder.imgMovie != null) {
 //                holder.imgMovie.setImageResource(movie.getImageId());
 //            }
             if (holder.tvName != null) {
-                holder.tvName.setText(ad.getAdsname());
+                holder.tvName.setText(ad.getmPageName());
             }
             if (holder.tvCategory != null) {
-                holder.tvCategory.setText(ad.getAdsCategory());
+                holder.tvCategory.setText(ad.getmPageCategory());
             }
         }
     }
