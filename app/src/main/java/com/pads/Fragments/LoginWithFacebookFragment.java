@@ -70,8 +70,8 @@ public class LoginWithFacebookFragment extends Fragment {
         //find all the views
         mLoginButton = (LoginButton) view.findViewById(R.id.login_button);
         mTvTestData = (TextView) view.findViewById(R.id.tvTestData);
-        mTvName = (TextView) view.findViewById(R.id.tvName);
-
+//        mTvName = (TextView) view.findViewById(R.id.tvName);
+//
 //        mProfile = (ImageView) view.findViewById(R.id.imgViewProfilePic);
 
         mLoginButton.setReadPermissions(Arrays.asList("public_profile", "user_friends", "user_likes"));

@@ -93,7 +93,6 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         @Override
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
-//            mTvEmpty.setVisibility(View.GONE);
             adapter.addAll(userLikes);
         }
     }

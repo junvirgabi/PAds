@@ -37,10 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     AdvertisementController controller = new AdvertisementController();
 
     Handler handler = new Handler();
-
+    int i;
     private ImageView imgAd;
 
-    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
