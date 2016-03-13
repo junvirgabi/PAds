@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     static List<Advertisement> mAds = new ArrayList<>();
     static AdvertisementController controller = new AdvertisementController();
     static Handler handler = new Handler();
-    static int i, j;
+    static int j;
     static ImageView imgAd;
     LoginWithFacebookFragment mLoginWithFacebookFragmentFragment;
     ListViewUserLikesFragment mListViewUserLikesFragment;
@@ -55,18 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         imgAd = (ImageView) findViewById(R.id.imgViewAd);
 
-//        mAds.addAll(controller.getAds());
-
         new getAds().execute();
-//        for (i = 0; i < mAds.size(); i++) {
-//            j = i;
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-//                    imgAd.setImageResource(mAds.get(j).getmImgId());
-//                }
-//            }, 3000);
-//        }
 
     }
 
@@ -172,17 +161,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onPostExecute(List<Advertisement> advertisements) {
             super.onPostExecute(advertisements);
             mAds.addAll(advertisements);
-//            for (i = 0; i < mAds.size(); i++) {
-//                j = i;
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        imgAd.setImageResource(mAds.get(j).getmImgId());
-//                    }
-//                }, 3000);
-//            }
-            j = 0;
-            while (j < mAds.size()) {
+
+            for (int i = 0; i <= mAds.size(); i++) {
+                j = i;
                 Log.d("AGI", "" + j);
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -192,27 +173,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             j = 0;
                         }
                         imgAd.setImageResource(mAds.get(j).getmImgId());
+                        j++;
                     }
 
-                }, 3000);
-                j++;
+                }, 5000 * j);
             }
-//            j = 0;
-//            new Thread() {
-//                public void run () {
-//                    while (true) {
-//                        try {
-//                            if (j < mAds.size()) {
-//                                imgAd.setImageResource(mAds.get(j).getmImgId());
-//                            }
-//                            j++;
-//                            Thread.sleep(3000);
-//                        } catch (InterruptedException e) {
-//
-//                        }
-//                    }
-//                }
-//            }.start();
         }
     }
 

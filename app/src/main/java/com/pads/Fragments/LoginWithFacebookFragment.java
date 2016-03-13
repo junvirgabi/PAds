@@ -84,7 +84,7 @@ public class LoginWithFacebookFragment extends Fragment {
 
                 if (mProfile != null) {
                     mTvTestData.setText(mProfile.getName());
-                    mTvName.setText(mProfile.getName());
+//                    mTvName.setText(mProfile.getName());
                     Log.d("NAME", "" + mProfile.getFirstName());
                 }
                 Log.d("FB User Token", loginResult.getAccessToken().getToken());
