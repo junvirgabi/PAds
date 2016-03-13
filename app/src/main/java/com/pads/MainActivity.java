@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ImageView imgAd;
 
-    int j;
-
+    int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,24 +63,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAds.addAll(controller.getAds());
         Log.d("MADS", mAds.size() + "");
 
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < mAds.size(); i++) {
-                    try {
-                        j = i;
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                imgAd.setImageResource(mAds.get(j).getmImgId());
-                            }
-                        }).wait(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        for (i = 0; i < mAds.size(); i++) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    imgAd.setImageResource(mAds.get(i).getmImgId());
                 }
-            }
-        });
+            }, 3000);
+        }
+
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < mAds.size(); i++) {
+//                    imgAd.setImageResource(mAds.get(i).getmImgId());
+//                }
+//            }
+//        }, 3000);
 
 //            new Thread(new Runnable() {
 //            @Override
