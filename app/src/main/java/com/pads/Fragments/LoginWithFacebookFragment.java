@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.AccessToken;
@@ -18,9 +19,13 @@ import com.facebook.FacebookSdk;
 import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.pads.Controllers.AdvertisementController;
+import com.pads.Entities.Advertisement;
 import com.pads.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by daleg on 10/02/2016.
@@ -32,8 +37,14 @@ public class LoginWithFacebookFragment extends Fragment {
     private AccessToken mAccessToken;
     private TextView mTvTestData;
     private TextView mTvName;
+
+
     //    private ImageView mImgViewProfilePic;
     private Profile mProfile;
+
+
+
+
 
     public static LoginWithFacebookFragment newInstance() {
         return new LoginWithFacebookFragment();
@@ -43,6 +54,8 @@ public class LoginWithFacebookFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCallbackManager = CallbackManager.Factory.create();
+
+
     }
 
     @Override
@@ -58,6 +71,7 @@ public class LoginWithFacebookFragment extends Fragment {
         mLoginButton = (LoginButton) view.findViewById(R.id.login_button);
         mTvTestData = (TextView) view.findViewById(R.id.tvTestData);
         mTvName = (TextView) view.findViewById(R.id.tvName);
+
 //        mProfile = (ImageView) view.findViewById(R.id.imgViewProfilePic);
 
         mLoginButton.setReadPermissions(Arrays.asList("public_profile", "user_friends", "user_likes"));
@@ -70,7 +84,7 @@ public class LoginWithFacebookFragment extends Fragment {
 
                 if (mProfile != null) {
                     mTvTestData.setText(mProfile.getName());
-//                    mTvName.setText(mProfile.getName());
+                    mTvName.setText(mProfile.getName());
                     Log.d("NAME", "" + mProfile.getFirstName());
                 }
                 Log.d("FB User Token", loginResult.getAccessToken().getToken());
