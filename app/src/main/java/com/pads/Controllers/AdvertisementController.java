@@ -66,7 +66,7 @@ public class AdvertisementController {
 
     }
 
-    public List<Advertisement> getMovies() {
+    public List<Advertisement> getAds() {
         return mAdvertisement;
     }
 }

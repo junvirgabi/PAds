@@ -1,20 +1,30 @@
 package com.pads;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
 import com.pads.Adapters.ListViewAdapterUserLikes;
+import com.pads.Controllers.AdvertisementController;
+import com.pads.Entities.Advertisement;
 import com.pads.Fragments.ListViewUserLikesFragment;
 import com.pads.Fragments.RecyclerViewUserLikesFragment;
 import com.pads.Fragments.LoginWithFacebookFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,6 +32,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ListViewUserLikesFragment mListViewUserLikesFragment;
     RecyclerViewUserLikesFragment mRecyclerViewUserLikesFragment;
 
+    List<Advertisement> mAds = new ArrayList<>();
+
+    AdvertisementController controller = new AdvertisementController();
+
+    Handler handler = new Handler();
+
+    private ImageView imgAd;
+
+    int j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +58,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        imgAd = (ImageView) findViewById(R.id.imgViewAd);
+
+        mAds.addAll(controller.getAds());
+        Log.d("MADS", mAds.size() + "");
+
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < mAds.size(); i++) {
+                    try {
+                        j = i;
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                imgAd.setImageResource(mAds.get(j).getmImgId());
+                            }
+                        }).wait(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+//            new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 0; i < mAds.size(); i++) {
+//                    imgAd.setImageResource(mAds.get(i).getmImgId());
+//                }
+//            }
+//        }).start();
     }
 
     @Override
@@ -103,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             getSupportFragmentManager()
                     .beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.fragmentContainer, mListViewUserLikesFragment)
                     .commit();
         } else if (id == R.id.nav_gallery) {

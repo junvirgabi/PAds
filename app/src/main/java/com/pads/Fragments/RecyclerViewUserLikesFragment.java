@@ -52,7 +52,6 @@ public class RecyclerViewUserLikesFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         //find all the views
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerListView);
-        tvEmpty = (TextView) view.findViewById(R.id.empty);
 
         recyclerView.setHasFixedSize(true);
 

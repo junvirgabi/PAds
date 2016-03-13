@@ -61,11 +61,10 @@ public class FacebookApi {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "name,likes{name,category}");
+        parameters.putString("fields", "name,likes.limit(1000){name,category}");
         request.setParameters(parameters);
         request.executeAsync();
 
-//        Log.d("JSON ARRAY",   + "");
         return likes;
     }
 }
