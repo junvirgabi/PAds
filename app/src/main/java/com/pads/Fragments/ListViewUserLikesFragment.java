@@ -34,7 +34,6 @@ import java.util.List;
 public class ListViewUserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private TextView mTvEmpty;
     private List<UserLikes> mLikes = new ArrayList<>();
 
     private ListViewAdapterUserLikes adapter;
@@ -61,7 +60,6 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         // find all the views
         mListView = (ListView) view.findViewById(R.id.listView);
 
-
         // create a new instance of adapter
         adapter = new ListViewAdapterUserLikes(getActivity(), R.layout.listview_list_item, mLikes);
 
@@ -72,7 +70,6 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         mListView.setOnItemClickListener(this);
 
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

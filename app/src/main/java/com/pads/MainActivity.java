@@ -1,5 +1,6 @@
 package com.pads;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -13,10 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.facebook.FacebookSdk;
-import com.pads.Adapters.ListViewAdapterUserLikes;
 import com.pads.Controllers.AdvertisementController;
 import com.pads.Entities.Advertisement;
 import com.pads.Fragments.ListViewUserLikesFragment;
@@ -28,17 +27,14 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    static List<Advertisement> mAds = new ArrayList<>();
+    static AdvertisementController controller = new AdvertisementController();
+    static Handler handler = new Handler();
+    static int i, j;
+    static ImageView imgAd;
     LoginWithFacebookFragment mLoginWithFacebookFragmentFragment;
     ListViewUserLikesFragment mListViewUserLikesFragment;
     RecyclerViewUserLikesFragment mRecyclerViewUserLikesFragment;
-
-    List<Advertisement> mAds = new ArrayList<>();
-
-    AdvertisementController controller = new AdvertisementController();
-
-    Handler handler = new Handler();
-    int i;
-    private ImageView imgAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,35 +55,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         imgAd = (ImageView) findViewById(R.id.imgViewAd);
 
-        mAds.addAll(controller.getAds());
-        Log.d("MADS", mAds.size() + "");
+//        mAds.addAll(controller.getAds());
 
-        for (i = 0; i < mAds.size(); i++) {
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imgAd.setImageResource(mAds.get(i).getmImgId());
-                }
-            }, 3000);
-        }
-
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < mAds.size(); i++) {
-//                    imgAd.setImageResource(mAds.get(i).getmImgId());
+        new getAds().execute();
+//        for (i = 0; i < mAds.size(); i++) {
+//            j = i;
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    imgAd.setImageResource(mAds.get(j).getmImgId());
 //                }
-//            }
-//        }, 3000);
+//            }, 3000);
+//        }
 
-//            new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < mAds.size(); i++) {
-//                    imgAd.setImageResource(mAds.get(i).getmImgId());
-//                }
-//            }
-//        }).start();
     }
 
     @Override
@@ -112,19 +92,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when leaving the activity */
+    /**
+     * Called when leaving the activity
+     */
     @Override
     public void onPause() {
         super.onPause();
     }
 
-    /** Called when returning to the activity */
+    /**
+     * Called when returning to the activity
+     */
     @Override
     public void onResume() {
         super.onResume();
     }
 
-    /** Called before the activity is destroyed */
+    /**
+     * Called before the activity is destroyed
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -173,6 +159,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    static class getAds extends AsyncTask<Void, Void, List<Advertisement>> {
+
+        @Override
+        protected List<Advertisement> doInBackground(Void... params) {
+            return controller.getAds();
+        }
+
+        @Override
+        protected void onPostExecute(List<Advertisement> advertisements) {
+            super.onPostExecute(advertisements);
+            mAds.addAll(advertisements);
+//            for (i = 0; i < mAds.size(); i++) {
+//                j = i;
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        imgAd.setImageResource(mAds.get(j).getmImgId());
+//                    }
+//                }, 3000);
+//            }
+            j = 0;
+            while (j < mAds.size()) {
+                Log.d("AGI", "" + j);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("AGI", "" + j);
+                        if (j >= mAds.size()) {
+                            j = 0;
+                        }
+                        imgAd.setImageResource(mAds.get(j).getmImgId());
+                    }
+
+                }, 3000);
+                j++;
+            }
+//            j = 0;
+//            new Thread() {
+//                public void run () {
+//                    while (true) {
+//                        try {
+//                            if (j < mAds.size()) {
+//                                imgAd.setImageResource(mAds.get(j).getmImgId());
+//                            }
+//                            j++;
+//                            Thread.sleep(3000);
+//                        } catch (InterruptedException e) {
+//
+//                        }
+//                    }
+//                }
+//            }.start();
+        }
     }
 
 }
