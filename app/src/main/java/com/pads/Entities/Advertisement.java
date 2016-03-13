@@ -6,13 +6,12 @@ package com.pads.Entities;
 public class Advertisement {
     private String mAdName;
     private String mAdCategory;
+    private int mImgId;
 
-    public Advertisement(String s, String s1, int a11) {
-    }
-
-    public Advertisement(String mAdName, String mAdCategory) {
+    public Advertisement(String mAdName, String mAdCategory, int mImgId) {
         this.mAdName = mAdName;
         this.mAdCategory = mAdCategory;
+        this.mImgId = mImgId;
     }
 
     public String getmAdName() {
@@ -21,6 +20,14 @@ public class Advertisement {
 
     public void setmAdName(String mAdName) {
         this.mAdName = mAdName;
+    }
+
+    public int getmImgId() {
+        return mImgId;
+    }
+
+    public void setmImgId(int mImgId) {
+        this.mImgId = mImgId;
     }
 
     public String getmAdCategory() {

@@ -45,9 +45,6 @@ public class PageLikedDetailsActivity extends AppCompatActivity {
             throw new IllegalArgumentException("position passed is invalid.");
         }
 
-//        PageLiked ads = new PageLiked();
-//        String ad = ads.getmPageName().toString();
-
         if (intent == null) {
             throw new NullPointerException("No movie found at the passed position.");
         }
