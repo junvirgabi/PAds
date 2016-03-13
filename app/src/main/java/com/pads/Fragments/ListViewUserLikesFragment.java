@@ -60,7 +60,7 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         // find all the views
         mListView = (ListView) view.findViewById(R.id.listView);
-        mTvEmpty = (TextView) view.findViewById(R.id.empty);
+
 
         // create a new instance of adapter
         adapter = new ListViewAdapterUserLikes(getActivity(), R.layout.listview_list_item, mLikes);
