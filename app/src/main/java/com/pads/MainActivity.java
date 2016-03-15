@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         imgAd = (ImageView) findViewById(R.id.imgViewAd);
 
-        new getAds().execute();
-
     }
 
     @Override
@@ -78,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_show_ads) {
+            new getAds().execute();
         }
 
         return super.onOptionsItemSelected(item);
