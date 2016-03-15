@@ -1,5 +1,7 @@
 package com.pads;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.facebook.FacebookSdk;
@@ -56,6 +59,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         imgAd = (ImageView) findViewById(R.id.imgViewAd);
+        imgAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLICKED", "kndj");
+                Intent i = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://google.com"));
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -77,9 +89,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             return true;
         } else if (id == R.id.action_show_ads) {
-            new getAds().execute();
-        } else if (id == R.id.action_hide_ads){
-            new getAds().cancel(true);
+            new filterAds().execute();
         }
 
         return super.onOptionsItemSelected(item);
@@ -134,6 +144,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.fragmentContainer, mListViewUserLikesFragment)
                     .commit();
+
+            getSupportActionBar().setTitle("User's Liked Pages");
+
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
 //        } else if (id == R.id.nav_gallery) {
 //
 //        } else if (id == R.id.nav_slideshow) {
@@ -154,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    static class getAds extends AsyncTask<Void, Void, List<Advertisement>> {
+    static class filterAds extends AsyncTask<Void, Void, List<Advertisement>> {
 
         @Override
         protected List<Advertisement> doInBackground(Void... params) {
@@ -167,22 +183,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mPointedAds.addAll(pointedAds);
             Log.d("PADS SIZE", "" + mPointedAds.size());
 
-//            for (int i = 0; i <= mPointedAds.size(); i++) {
-//                j = i;
-//                Log.d("AGI", "" + j);
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Log.d("AGI", "" + j);
-//                        if (j >= mPointedAds.size()) {
-//                            j = 0;
-//                        }
-//                        imgAd.setImageResource(mPointedAds.get(j).getmImgId());
-//                        j++;
-//                    }
-//
-//                }, 5000 * j);
-//            }
+//            imgAd.setImageResource(mStaticAds.get(20).getmImgId());
+            for (int i = 0; i <= mPointedAds.size(); i++) {
+                j = i;
+                Log.d("AGI", "" + j);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("AGI", "" + j);
+                        if (j >= mPointedAds.size()) {
+                            j = 0;
+                        }
+                        imgAd.setImageResource(mPointedAds.get(j).getmImgId());
+                        j++;
+                    }
+
+                }, 5000 * j);
+            }
         }
     }
 
