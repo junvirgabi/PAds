@@ -8,6 +8,23 @@ public class Advertisement {
     private String mAdCategory;
     private int mImgId;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private String url;
+
+    public Advertisement(String url, String mAdName, String mAdCategory, int mImgId) {
+        this.url = url;
+        this.mImgId = mImgId;
+        this.mAdCategory = mAdCategory;
+        this.mAdName = mAdName;
+    }
+
     public Advertisement(String mAdName, String mAdCategory, int mImgId) {
         this.mAdName = mAdName;
         this.mAdCategory = mAdCategory;

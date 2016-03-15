@@ -10,5 +10,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="eula">PAds (Pointed Advertisements) is an application add on that integrates mobile banner ads into this application. Its main function is to push advertisements that is relevant and tailored to your interests. For this to work, first, you will have to login to your Facebook account below and approve the needed permission. The security of your Personal Information is important to us and is kept confidential.</string>
     <string name="action_show_ads">Show Ads</string>
+    <string name="action_hide_ads">Hide Ads</string>
 
 </resources>

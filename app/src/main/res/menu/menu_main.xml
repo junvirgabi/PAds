@@ -7,6 +7,12 @@
         android:id="@+id/action_show_ads"
         android:title="@string/action_show_ads"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_hide_ads"
+        android:title="@string/action_hide_ads"
+        app:showAsAction="never"
+        />
+
 
     <item
         android:id="@+id/action_settings"

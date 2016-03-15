@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.action_show_ads) {
             new getAds().execute();
+        } else if (id == R.id.action_hide_ads){
+            new getAds().cancel(true);
         }
 
         return super.onOptionsItemSelected(item);
