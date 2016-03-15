@@ -31,15 +31,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    static AdvertisementController controller = new AdvertisementController();
-    public static List<Advertisement> mStaticAds = controller.getAds();
-    static List<Advertisement> mPointedAds = new ArrayList<>();
-    static Handler handler = new Handler();
-    static int j;
-    static ImageView imgAd;
+    public AdvertisementController controller = new AdvertisementController();
+    public List<Advertisement> mStaticAds = controller.getAds();
+    public List<Advertisement> mPointedAds = new ArrayList<>();
+    public Handler handler = new Handler();
+    public int j;
     LoginWithFacebookFragment mLoginWithFacebookFragmentFragment;
     ListViewUserLikesFragment mListViewUserLikesFragment;
     RecyclerViewUserLikesFragment mRecyclerViewUserLikesFragment;
+    private ImageView imgAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mListViewUserLikesFragment = ListViewUserLikesFragment.newInstance();
 
         imgAd = (ImageView) findViewById(R.id.imgViewAd);
         imgAd.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (id == R.id.action_show_ads) {
             new filterAds().execute();
+//            new showAds().execute();
+
+//            Log.d("PADS SIZE", "" + mPointedAds.size());
         }
 
         return super.onOptionsItemSelected(item);
@@ -137,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_user_likes) {
 //            mRecyclerViewUserLikesFragment = RecyclerViewUserLikesFragment.newInstance();
+//            new filterAds().execute();
             mListViewUserLikesFragment = ListViewUserLikesFragment.newInstance();
 
             getSupportFragmentManager()
@@ -146,16 +152,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
 
             getSupportActionBar().setTitle("User's Liked Pages");
-
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            }
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-
         } else if (id == R.id.nav_pads) {
             mLoginWithFacebookFragmentFragment = LoginWithFacebookFragment.newInstance();
 
@@ -170,11 +166,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    static class filterAds extends AsyncTask<Void, Void, List<Advertisement>> {
+    public class filterAds extends AsyncTask<List<Advertisement>, Void, List<Advertisement>> {
 
         @Override
-        protected List<Advertisement> doInBackground(Void... params) {
-            return AdUtils.filterLikesAndAds(ListViewUserLikesFragment.mLikes, mStaticAds);
+        protected List<Advertisement> doInBackground(List<Advertisement>... params) {
+            return AdUtils.filterLikesAndAds(mListViewUserLikesFragment.mLikes, mStaticAds);
         }
 
         @Override
@@ -183,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mPointedAds.addAll(pointedAds);
             Log.d("PADS SIZE", "" + mPointedAds.size());
 
-//            imgAd.setImageResource(mStaticAds.get(20).getmImgId());
+            imgAd.setImageResource(mStaticAds.get(20).getmImgId());
             for (int i = 0; i <= mPointedAds.size(); i++) {
                 j = i;
                 Log.d("AGI", "" + j);
@@ -197,9 +193,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         imgAd.setImageResource(mPointedAds.get(j).getmImgId());
                         j++;
                     }
-
                 }, 5000 * j);
             }
+        }
+    }
+
+    public class showAds extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            Log.d("USER LIKES SOZE", "" + mListViewUserLikesFragment.mLikes.size());
+            for (int i = 0; i <= mStaticAds.size(); i++) {
+                j = i;
+//                Log.d("AGI", "" + j);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+//                        Log.d("AGI", "" + j);
+                        if (j >= mStaticAds.size()) {
+                            j = 0;
+                        }
+                        imgAd.setImageResource(mStaticAds.get(j).getmImgId());
+                        j++;
+                    }
+                }, 10000 * j);
+            }
+
+            return null;
         }
     }
 

@@ -27,7 +27,7 @@ public class AdUtils {
                 }
             }
         }
-
+        Log.d("Filtered Ads", "" + filteredAds.size());
         return filteredAds;
     }
 }

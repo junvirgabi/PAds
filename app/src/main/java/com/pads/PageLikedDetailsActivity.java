@@ -82,8 +82,8 @@ public class PageLikedDetailsActivity extends AppCompatActivity {
         mTvPageName = (TextView) findViewById(R.id.tvPageName);
         mTvPageCategory = (TextView) findViewById(R.id.tvPageCategory);
 
-        mTvPageName.setText(mName);
-        mTvPageCategory.setText(mCategoty);
+        mTvPageName.setText("Page Name: " + mName);
+        mTvPageCategory.setText("Page Category" + mCategoty);
         new getPagePic().execute();
 
         if (getSupportActionBar() != null) {

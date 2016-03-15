@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +31,8 @@ import java.util.List;
  */
 public class ListViewUserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    public static List<UserLikes> mLikes = new ArrayList<>();
-    private static ListViewAdapterUserLikes adapter;
+    public List<UserLikes> mLikes = new ArrayList<>();
+    private ListViewAdapterUserLikes adapter;
     private ListView mListView;
 
     public static ListViewUserLikesFragment newInstance() {
@@ -77,7 +78,7 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         startActivity(intent);
     }
 
-    static class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
+    public class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
 
         @Override
         protected List<UserLikes> doInBackground(AccessToken... params) {
@@ -87,8 +88,9 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         @Override
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
-            adapter.addAll(userLikes);
             mLikes.addAll(userLikes);
+            adapter.addAll(userLikes);
+            Log.d("MLIKES SIZE", "" + mLikes.size());
         }
     }
 }
