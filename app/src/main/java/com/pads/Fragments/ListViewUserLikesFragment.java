@@ -14,17 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.pads.API.FacebookApi;
 import com.pads.Adapters.ListViewAdapterUserLikes;
 import com.pads.Entities.UserLikes;
-import com.pads.MainActivity;
 import com.pads.PageLikedDetailsActivity;
 import com.pads.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +30,9 @@ import java.util.List;
  */
 public class ListViewUserLikesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
+    public static List<UserLikes> mLikes = new ArrayList<>();
+    private static ListViewAdapterUserLikes adapter;
     private ListView mListView;
-    private List<UserLikes> mLikes = new ArrayList<>();
-
-    private ListViewAdapterUserLikes adapter;
 
     public static ListViewUserLikesFragment newInstance() {
         return new ListViewUserLikesFragment();
@@ -75,12 +71,13 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getActivity(), PageLikedDetailsActivity.class);
         intent.putExtra("key_position", position);
-        intent.putExtra("PAGE_NAME", (Serializable) mLikes.get(position).getmName());
-        intent.putExtra("PAGE_CATEGORY", (Serializable) mLikes.get(position).getmCategory());
+        intent.putExtra("PAGE_NAME", mLikes.get(position).getmName());
+        intent.putExtra("PAGE_CATEGORY", mLikes.get(position).getmCategory());
+        intent.putExtra("PAGE_PIC_URL", mLikes.get(position).getmImgUrl());
         startActivity(intent);
     }
 
-    public class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
+    static class FetchLikes extends AsyncTask<AccessToken, Void, List<UserLikes>> {
 
         @Override
         protected List<UserLikes> doInBackground(AccessToken... params) {
@@ -91,6 +88,7 @@ public class ListViewUserLikesFragment extends Fragment implements AdapterView.O
         protected void onPostExecute(List<UserLikes> userLikes) {
             super.onPostExecute(userLikes);
             adapter.addAll(userLikes);
+            mLikes.addAll(userLikes);
         }
     }
 }

@@ -8,6 +8,15 @@ public class UserLikes {
     private String mCategory;
     private String mId;
     private String mImgUrl;
+    private String mDesc;
+
+    public UserLikes(String mName, String mCategory, String mId, String mImgUrl, String mDesc) {
+        this.mName = mName;
+        this.mCategory = mCategory;
+        this.mId = mId;
+        this.mImgUrl = mImgUrl;
+        this.mDesc = mDesc;
+    }
 
     public UserLikes(String mName, String mCategory, String mId) {
         this.mName = mName;
@@ -52,5 +61,13 @@ public class UserLikes {
 
     public void setmImgUrl(String mImgUrl) {
         this.mImgUrl = mImgUrl;
+    }
+
+    public String getmDesc() {
+        return mDesc;
+    }
+
+    public void setmDesc(String mDesc) {
+        this.mDesc = mDesc;
     }
 }

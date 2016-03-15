@@ -19,16 +19,18 @@ import com.facebook.FacebookSdk;
 import com.pads.Controllers.AdvertisementController;
 import com.pads.Entities.Advertisement;
 import com.pads.Fragments.ListViewUserLikesFragment;
-import com.pads.Fragments.RecyclerViewUserLikesFragment;
 import com.pads.Fragments.LoginWithFacebookFragment;
+import com.pads.Fragments.RecyclerViewUserLikesFragment;
+import com.pads.Util.AdUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    static List<Advertisement> mAds = new ArrayList<>();
     static AdvertisementController controller = new AdvertisementController();
+    public static List<Advertisement> mStaticAds = controller.getAds();
+    static List<Advertisement> mPointedAds = new ArrayList<>();
     static Handler handler = new Handler();
     static int j;
     static ImageView imgAd;
@@ -130,11 +132,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.fragmentContainer, mListViewUserLikesFragment)
                     .commit();
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
+//        } else if (id == R.id.nav_gallery) {
+//
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_pads) {
             mLoginWithFacebookFragmentFragment = LoginWithFacebookFragment.newInstance();
@@ -147,37 +149,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     static class getAds extends AsyncTask<Void, Void, List<Advertisement>> {
 
         @Override
         protected List<Advertisement> doInBackground(Void... params) {
-            return controller.getAds();
+            return AdUtils.filterLikesAndAds(ListViewUserLikesFragment.mLikes, mStaticAds);
         }
 
         @Override
-        protected void onPostExecute(List<Advertisement> advertisements) {
-            super.onPostExecute(advertisements);
-            mAds.addAll(advertisements);
+        protected void onPostExecute(List<Advertisement> pointedAds) {
+            super.onPostExecute(pointedAds);
+            mPointedAds.addAll(pointedAds);
+            Log.d("PADS SIZE", "" + mPointedAds.size());
 
-            for (int i = 0; i <= mAds.size(); i++) {
-                j = i;
-                Log.d("AGI", "" + j);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.d("AGI", "" + j);
-                        if (j >= mAds.size()) {
-                            j = 0;
-                        }
-                        imgAd.setImageResource(mAds.get(j).getmImgId());
-                        j++;
-                    }
-
-                }, 5000 * j);
-            }
+//            for (int i = 0; i <= mPointedAds.size(); i++) {
+//                j = i;
+//                Log.d("AGI", "" + j);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.d("AGI", "" + j);
+//                        if (j >= mPointedAds.size()) {
+//                            j = 0;
+//                        }
+//                        imgAd.setImageResource(mPointedAds.get(j).getmImgId());
+//                        j++;
+//                    }
+//
+//                }, 5000 * j);
+//            }
         }
     }
 

@@ -24,14 +24,17 @@ public class FacebookApi {
     private static final String FB_LIKES = "likes";
     private static final String FB_DATA = "data";
     private static final String FB_CATEGORY = "category";
+    private static final String FB_PICTURE = "picture";
+    private static final String FB_PIC_URL = "url";
     private static final String FB_ID = "id";
 
-    private static JSONObject jsonObject, jsonObject2;
+    private static JSONObject jsonObject, jsonObject2, jsonObject3, jsonObject4;
     private static JSONArray jsonArray;
 
     private static String mId;
     private static String mName;
     private static String mCategory;
+    private static String mPicUrl;
 
     private static List<UserLikes> likes = new ArrayList<>();
 
@@ -44,7 +47,7 @@ public class FacebookApi {
                     jsonObject = object.getJSONObject(FB_LIKES);
                     Log.d("OBJECT", jsonObject.toString());
                     jsonArray = jsonObject.getJSONArray(FB_DATA);
-                    Log.d("ARRAY", jsonArray.toString());
+                    Log.d("ARRAY", jsonArray.length() + "");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         jsonObject2 = jsonArray.getJSONObject(i);
 
@@ -52,7 +55,12 @@ public class FacebookApi {
                         mName = jsonObject2.getString(FB_NAME);
                         mCategory = jsonObject2.getString(FB_CATEGORY);
 
-                        likes.add(new UserLikes(mName, mCategory, mId));
+                        //parse page pic url
+                        jsonObject3 = jsonObject2.getJSONObject(FB_PICTURE);
+                        jsonObject4 = jsonObject3.getJSONObject(FB_DATA);
+                        mPicUrl = jsonObject4.getString(FB_PIC_URL);
+
+                        likes.add(new UserLikes(mName, mCategory, mId, mPicUrl));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -61,7 +69,7 @@ public class FacebookApi {
         });
 
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "name,likes.limit(1000){name,category}");
+        parameters.putString("fields", "name,likes.limit(200){name,category,picture{url}}");
         request.setParameters(parameters);
         request.executeAsync();
 
