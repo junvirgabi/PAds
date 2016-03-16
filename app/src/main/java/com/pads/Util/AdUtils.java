@@ -21,7 +21,7 @@ public class AdUtils {
         Log.d("AdUtils", "1st param: " + userLikesList.size());
         Log.d("AdUtils", "2st param: " + staticAds.size());
         for (int i = 0; i < userLikesList.size(); i++) {
-            for (int j = i, k = 0; k < numOfStaticAds; i++) {
+            for (int j = i, k = 0; k < numOfStaticAds; k++) {
                 if (userLikesList.get(j).getmCategory().equals(staticAds.get(k).getmAdCategory())) {
                     filteredAds.add(staticAds.get(k));
                 }

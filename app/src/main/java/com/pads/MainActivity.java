@@ -179,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mPointedAds.addAll(pointedAds);
             Log.d("PADS SIZE", "" + mPointedAds.size());
 
-            imgAd.setImageResource(mStaticAds.get(20).getmImgId());
             for (int i = 0; i <= mPointedAds.size(); i++) {
                 j = i;
                 Log.d("AGI", "" + j);
@@ -203,21 +202,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected Void doInBackground(Void... params) {
             Log.d("USER LIKES SOZE", "" + mListViewUserLikesFragment.mLikes.size());
-            for (int i = 0; i <= mStaticAds.size(); i++) {
-                j = i;
-//                Log.d("AGI", "" + j);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-//                        Log.d("AGI", "" + j);
-                        if (j >= mStaticAds.size()) {
-                            j = 0;
-                        }
-                        imgAd.setImageResource(mStaticAds.get(j).getmImgId());
-                        j++;
-                    }
-                }, 10000 * j);
-            }
+//            for (int i = 0; i <= mStaticAds.size(); i++) {
+//                j = i;
+////                Log.d("AGI", "" + j);
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        Log.d("AGI", "" + j);
+//                        if (j >= mStaticAds.size()) {
+//                            j = 0;
+//                        }
+//                        imgAd.setImageResource(mStaticAds.get(j).getmImgId());
+//                        j++;
+//                    }
+//                }, 10000 * j);
+//            }
 
             return null;
         }
